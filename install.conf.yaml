@@ -1,3 +1,22 @@
-- clean: []
-- link: {}
-- shell: []
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~', '~/.config']
+
+- shell:
+  - [gpg -d gpg/enc/keysec.gpg > gpg/dec/keysec, Decrypting GPG key]
+  - [gpg --import gpg/dec/keysec, Importing GPG key]
+  - [rm gpg/dec/keysec, Delete decrypted GPG key]
+  - [gpg -d gpg/enc/id_rsa.gpg > gpg/dec/id_rsa, Decrypting SSH key]
+
+- link:
+    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.gitconfig: git/.gitconfig
+    ~/.gitignore_global: git/.gitignore_global
+    ~/.ssh/id_rsa: gpg/dec/id_rsa
+
+- shell:
+  - [nvim -es -u nvim/init.vim -i NONE -c "PlugInstall" -c "qa", Installing nvim plugins]
+  - [./alias.sh, Creating aliases]

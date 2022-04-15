@@ -1,0 +1,17 @@
+[user]
+	name = Pavel Horáček
+	email = pahorace@redhat.com
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[gpg]
+	program = gpg2
+[commit]
+    gpgSign = true
+
+[alias]
+    loglines = log --graph --abrev-commits --pretty=oneline
