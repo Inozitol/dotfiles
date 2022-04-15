@@ -12,6 +12,5 @@
 	program = gpg2
 [commit]
     gpgSign = true
-
 [alias]
     loglines = log --graph --abrev-commits --pretty=oneline

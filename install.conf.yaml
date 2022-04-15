@@ -5,6 +5,9 @@
 
 - clean: ['~', '~/.config']
 
+- create:
+  - gpg/dec
+
 - shell:
   - [gpg -d gpg/enc/keysec.gpg > gpg/dec/keysec, Decrypting GPG key]
   - [gpg --import gpg/dec/keysec, Importing GPG key]
