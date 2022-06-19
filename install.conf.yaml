@@ -7,19 +7,37 @@
 
 - create:
   - gpg/dec
+  - bin
 
+# Key decryption
 - shell:
   - [gpg -d gpg/enc/keysec.gpg > gpg/dec/keysec, Decrypting GPG key]
   - [gpg --import gpg/dec/keysec, Importing GPG key]
   - [rm gpg/dec/keysec, Delete decrypted GPG key]
   - [gpg -d gpg/enc/id_rsa.gpg > gpg/dec/id_rsa, Decrypting SSH key]
 
+# VPN Script decryption
+- shell:
+  - [gpg -d gpg/enc/vpncon.gpg > gpg/dec/vpncon, Decrypting VPN Conn script]
+  - [chmod +x gpg/dec/vpncon, Making VPN Conn script executable]
+
+# Neovim download
+- shell:
+  - [wget --quiet https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage --output-document bin/nvim, Download neovim]
+  - [chmod +x bin/nvim, Make neovim executable]
+
 - link:
+    ~/.bashrc: bash/.bashrc
+    ~/bin/nvim: bin/nvim
     ~/.config/nvim/init.vim: nvim/init.vim
     ~/.gitconfig: git/.gitconfig
     ~/.gitignore_global: git/.gitignore_global
     ~/.ssh/id_rsa: gpg/dec/id_rsa
+    ~/bin/vpncon: gpg/dec/vpncon
 
 - shell:
+  - 
+    command: sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    description: Install vim-plug
   - [nvim -es -u nvim/init.vim -i NONE -c "PlugInstall" -c "qa", Installing nvim plugins]
   - [./alias.sh, Creating aliases]

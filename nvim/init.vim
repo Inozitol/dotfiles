@@ -32,17 +32,6 @@ Plug 'airblade/vim-gitgutter'
 call plug#end()
 filetype plugin indent on
 
-""""""" SuperTab configuration """""""
-"let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
-"function! Completefunc(findstart, base)
-"    return "\<c-x>\<c-p>"
-"endfunction
-
-"call SuperTabChain(Completefunc, '<c-n>')
-
-"let g:SuperTabCompletionContexts = ['g:ContextText2']
-
-
 """"""" General coding stuff """""""
 " Highlight 80th column
 "set colorcolumn=80
@@ -56,13 +45,6 @@ set mouse-=a
 set completeopt=menuone,preview,noinsert
 " Let vim-gitgutter do its thing on large files
 let g:gitgutter_max_signs=10000
-
-" If your terminal's background is white (light theme), uncomment the following
-" to make EasyMotion's cues much easier to read.
-" hi link EasyMotionTarget String
-" hi link EasyMotionShade Comment
-" hi link EasyMotionTarget2First String
-" hi link EasyMotionTarget2Second Statement
 
 set encoding=utf8
 
@@ -81,13 +63,6 @@ let mapleader=","
 imap <C-backspace> ú
 imap <C-\> ú
 imap <C-delete> ø
-
-" Arrow keys up/down move visually up and down rather than by whole lines.  In
-" other words, wrapped lines will take longer to scroll through, but better
-" control in long bodies of text.
-" NOTE - Disabled since <leader><leader>w|e|b works well with easymotion
-"noremap <up> gk
-"noremap <down> gj
 
 " Neomake and other build commands (ctrl-b)
 nnoremap <C-b> :w<cr>:Neomake<cr>
